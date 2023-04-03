@@ -1,0 +1,68 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+header,
+footer{
+    background-color: white;
+    height: 10vh;
+}
+
+main{
+    background-color: rgb(17, 16, 16);
+    height: 80vh;
+}
+
+img{
+    width: 5%;
+}
+
+.btn-dark {
+    color: goldenrod;
+}
+
+.ms-pt-5{
+    padding: 3rem 0;
+}
+
+.ms-fs-1{
+    font-size: 6rem;
+}
+
+#box{
+    width: 35%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.box-js{
+    width: calc(100% / 10);
+    border: 1px solid goldenrod;
+    color: goldenrod;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ms-color-custom{
+    background-color: goldenrod;
+    color: goldenrod;
+}
+
+.fa-heart {
+    color: red;
+}
+
+.ms-w-normale{
+
+    width: calc(100% / 9);
+}
+
+.ms-w-difficile{
+
+    width: calc(100% / 7);
+}
+
