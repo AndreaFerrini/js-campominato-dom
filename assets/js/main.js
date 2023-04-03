@@ -1,4 +1,5 @@
-/*Copiamo la griglia fatta nella nuova repo e aggiungiamo la logica del gioco (attenzione: non bisogna copiare tutta la cartella dell'esercizio ma solo l'index.html, e le cartelle js/ css/ con i relativi script e fogli di stile, per evitare problemi con l'inizializzazione di git).
+/* 
+Copiamo la griglia fatta ieri nella nuova repo e aggiungiamo la logica del gioco (attenzione: non bisogna copiare tutta la cartella dell'esercizio ma solo l'index.html, e le cartelle js/ css/ con i relativi script e fogli di stile, per evitare problemi con l'inizializzazione di git).
 Il computer deve generare 16 numeri casuali nello stesso range della difficoltà prescelta: le bombe. Attenzione: nella stessa cella può essere posizionata al massimo una bomba, perciò nell’array delle bombe non potranno esserci due numeri uguali.
 In seguito l'utente clicca su una cella: se il numero è presente nella lista dei numeri generati - abbiamo calpestato una bomba - la cella si colora di rosso e la partita termina. Altrimenti la cella cliccata si colora di azzurro e l'utente può continuare a cliccare sulle altre celle.
 La partita termina quando il giocatore clicca su una bomba o quando raggiunge il numero massimo possibile di numeri consentiti (ovvero quando ha rivelato tutte le celle che non sono bombe).
@@ -10,12 +11,14 @@ Aggiungere una select accanto al bottone di generazione, che fornisca una scelta
 - difficoltà 3 ⇒ 49 caselle, con un numero compreso tra 1 e 49, divise in 7 caselle per 7 righe;
  */
 
+
 let difficoltà = document.getElementById("difficoltà")
 
 let sceltaDifficolta;
 
 
-function avviaGioco(){
+function AvviaGioco(){
+
 
     if(difficoltà.value == 1){
 
@@ -31,58 +34,98 @@ function avviaGioco(){
 
     }
 
+    let arrayNumeriRandom = []
+
+    console.log(arrayNumeriRandom)
+
+    while( arrayNumeriRandom.length < 16 ){
+
+        let numeriRandom = Math.floor(Math.random() * sceltaDifficolta) + 1
+
+        if(!arrayNumeriRandom.includes(numeriRandom)){
+
+            arrayNumeriRandom.push(numeriRandom)
+
+        }
+    }
+
+
     let box = document.getElementById("box")
 
     box.innerHTML = ""
 
     for (let x = 1; x <= sceltaDifficolta; x++) {
-
+    
 
         let divNuovo = document.createElement("div")
         divNuovo.classList.add("box-js")
+        divNuovo.innerHTML = `${x}`;
 
-
+        
         if(sceltaDifficolta == 81){
-
+        
             divNuovo.classList.add("ms-w-normale")
-
+    
         }else if( sceltaDifficolta == 49){
-
+    
             divNuovo.classList.add("ms-w-difficile")
-
+    
         }
-
-        divNuovo.addEventListener('click' , function(){
-
-            this.classList.toggle('ms-color-custom')
-            console.log(this)
-            console.log(`il numero selezionato è: ${x}`);
-
-        })
-
-
-        if (x % 3 == 0 && x % 5 == 0) {
-
-            divNuovo.innerHTML = `<h4>${x}</h4>`;
-
-
-        } else if (x % 5 == 0) {
-
-            divNuovo.innerHTML = `<h4>${x}</h4>`;
-
-
-        } else if (x % 3 == 0) {
-
-            divNuovo.innerHTML = `<h4>${x}</h4>`;
-
-
-        } else {
-
-            divNuovo.innerHTML = `<h4>${x}</h4>`;
-
-        }
-
+    
         box.append(divNuovo)
+
+
+    }
+
+    let divNelBox = document.querySelectorAll(".box-js")
+
+    let punteggio = 0
+
+    for(k = 0; k < divNelBox.length; k++){
+
+        let div = divNelBox[k]
+
+        div.addEventListener('click' , function(){
+
+
+            if(arrayNumeriRandom.includes(parseInt(div.innerHTML))){
+                
+                for(y = 0; y < divNelBox.length; y++){
+                    
+                    if(arrayNumeriRandom.includes((parseInt(divNelBox[y].innerText)))){
+
+                        divNelBox[y].classList.add("ms-color-red")
+                        document.getElementById("risultato").innerText = `Hai Perso!`
+                        document.getElementById("punteggio").innerText = ` Il tuo punteggio è ${punteggio}`
+                    }
+                }
+    
+            }else{
+
+                div.classList.add('ms-color-custom')
+                punteggio++
+                console.log(punteggio)
+
+                if(sceltaDifficolta === 100 && punteggio === 84){
+
+                    document.getElementById("risultato").innerHTML = `<span class="ms-color-green">Hai Vinto!</span>`
+                    document.getElementById("punteggio").innerHTML = ` Il tuo punteggio è ${punteggio}`
+
+                }else if(sceltaDifficolta === 81 && punteggio === 65){
+
+                    document.getElementById("risultato").innerHTML = `<span class="ms-color-green">Hai Vinto!</span>`
+                    document.getElementById("punteggio").innerHTML = ` Il tuo punteggio è ${punteggio}`
+
+                }else if(sceltaDifficolta === 49 && punteggio === 33){
+
+                    document.getElementById("risultato").innerHTML = `<span class="ms-color-green">Hai Vinto!</span>`
+                    document.getElementById("punteggio").innerHTML = ` Il tuo punteggio è ${punteggio}`
+
+                }
+                
+            }
+            
+        })
 
     }
 
