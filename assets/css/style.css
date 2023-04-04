@@ -23,15 +23,15 @@ img{
 }
 
 .ms-pt-5{
-    padding: 3rem 0;
+    padding: 4rem 0;
 }
 
 .ms-fs-1{
-    font-size: 6rem;
+    font-size: 8rem;
 }
 
 #box{
-    width: 35%;
+    width: 45%;
     margin: auto;
     display: flex;
     flex-wrap: wrap;

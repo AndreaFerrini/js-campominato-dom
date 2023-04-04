@@ -74,7 +74,6 @@ function AvviaGioco(){
     
         box.append(divNuovo)
 
-
     }
 
     let divNelBox = document.querySelectorAll(".box-js")
@@ -87,13 +86,12 @@ function AvviaGioco(){
 
         div.addEventListener('click' , function(){
 
-
             if(arrayNumeriRandom.includes(parseInt(div.innerHTML))){
                 
                 for(y = 0; y < divNelBox.length; y++){
                     
                     if(arrayNumeriRandom.includes((parseInt(divNelBox[y].innerText)))){
-
+                        
                         divNelBox[y].classList.add("ms-color-red")
                         document.getElementById("risultato").innerText = `Hai Perso!`
                         document.getElementById("punteggio").innerText = ` Il tuo punteggio è ${punteggio}`
